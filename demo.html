@@ -1,0 +1,43 @@
+<form ng-app="myapp" name="myform" novalidate ng-init="myCol='lightyellow'">
+    <div ng-controller="Ctrl">
+        Enter a number :<br>
+        <input name="number" is-number ng-model="demo.number" style="background-color: {{myCol}}">
+        <span ng-show="!demo.validity">Value is invalid</span>
+
+        <p>Number reflection :<br>
+        <input value="{{demo.number}}" style="background-color: {{myCol}}">
+        </p>
+
+        <p>What's your favourite color :<br>
+        <input value="{{myCol}}" style="background-color: {{myCol}}" ng-model="myCol">
+        </p>
+
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script>
+
+    var $scope;
+    var app = angular.module('myapp', []);
+
+    app.controller('Ctrl', function($scope) {
+        $scope.demo =  {number: 1, validity: true}
+    });
+
+    app.directive('isNumber', function () {
+        return {
+            require: 'ngModel',
+            link: function (scope) {
+                scope.$watch('demo.number', function(newValue,oldValue) {
+                    var arr = String(newValue).split("");
+                    if (arr.length === 0) return;
+                    if (arr.length === 1 && (arr[0] == '-' || arr[0] === '.' )) return;
+                    if (arr.length === 2 && newValue === '-.') return;
+                    if (isNaN(newValue)) {
+                        scope.demo.number = oldValue;
+                    }
+                });
+            }
+        };
+    });
+</script>
+
