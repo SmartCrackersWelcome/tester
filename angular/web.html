@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html >
+<head>
+	<title>AngularJs Task</title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="">
+	First TextBox : <input type="text" placeholder="Enter a Number" ng-model="name" onkeypress='return (event.keyCode == 127) || (event.keyCode === 8) || (event.charCode >= 48 && event.charCode <= 57)' required> <br>
+
+	Second TextBox : <input type="text" value="{{name}}" >
+	
+
+</div>
+</body>
+
+
+</html>
